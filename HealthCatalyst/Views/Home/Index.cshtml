@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container">
+
+    <div class="center-block">
+
+        @using (Ajax.BeginForm("Search", "Home", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "" }))
+        {
+
+            @Html.AntiForgeryToken() 
+
+            <div class="padding-large">
+
+                <div class="card">
+                    <div class="card-content">
+                        <div class="cardTitle">
+                            People who need people
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <label for="autocomplete-input">Find your people</label>
+                                <input name="autocomplete-input" id="autocomplete-input" class="autocomplete" placeholder="Search..." tyoe="text"/> 
+
+                            </div>
+
+                            <div id="details"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        }
+
+    </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.1.1.js"
+        integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+<script>
+
+    var people = {};
+    var details = {};
+
+    $(document).ready(function () {
+
+        
+        //From SitePoint : https://www.sitepoint.com/community/t/capitalizing-first-letter-of-each-word-in-string/209644
+        function Capitalize(str) {
+            str = str.toLowerCase().split(' ');
+
+            for (var i = 0; i < str.length; i++) {
+                str[i] = str[i].split('');
+                str[i][0] = str[i][0].toUpperCase();
+                str[i] = str[i].join('');
+            }
+            return str.join(' ');
+        }
+
+        $.ajax({
+            url: 'https://randomuser.me/api/?results=25&inc=name,picture,email,cell,location,login,dob,gender&format=pretty&noinfo',
+            dataType: 'json', 
+            success: function (data) {
+
+                console.log(data);
+
+                var html = "";
+                for (var i = 0; i < data.results.length; i++) {
+
+                    var nameToUse = data.results[i].name.first + " " + data.results[i].name.last;
+                    var pictureToUse = data.results[i].picture.thumbnail;
+
+                    people[nameToUse] = pictureToUse;
+                    details[nameToUse] = i;
+
+                }
+                
+                console.log( details);
+
+                $('input.autocomplete').autocomplete({
+                    data: people
+                });
+
+
+                $(".autocomplete-content").on("click", function (e) {
+                    
+                    var name = $("#autocomplete-input").val();
+                    var id = details[name];
+                    var person = data.results[details[name]];
+                    var formattedFirstName = Capitalize(person.name.first); 
+                    var formattedLastName = Capitalize(person.name.last); 
+                    var formattedCity = Capitalize(person.location.city); 
+                    var formattedState = Capitalize(person.location.state);
+                    var formattedStreet = Capitalize(person.location.street); 
+                    $("#details").html(
+
+                        "<div class ='card'><div class='col s12'><ul class='collection'><li class='collection-item avatar'><img src=" + person.picture.medium + " class='circle'><span class='title'> Name: " + formattedFirstName + " " + formattedLastName + "</span><p><span> Username: " + person.login.username + "<br> Phone Number: " + person.cell + "<br> Address:  " + formattedStreet + "<br>" + formattedCity + " " + formattedState + ", " + person.location.postcode + "</p></li></ul></div></div>"
+
+
+                        );
+                        
+                        
+          
+
+                });
+
+
+            }
+        });
+
+
+    }); 
+</script>

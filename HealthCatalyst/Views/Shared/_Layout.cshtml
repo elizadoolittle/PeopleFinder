@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - People Finder</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/materialize/materialize.css")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+
+</head>
+<body>
+        <div class="container">
+                <nav>
+                    <div class="nav-wrapper">
+                        <a href="#" class="brand-logo right">Logo</a>
+                        <ul id="nav-mobile" class="left hide-on-med-and-down">
+                            <li> @Html.ActionLink("About Elizabeth", "About", "Home")</li>
+                            <li>@Html.ActionLink("Slow People Finder", "Slow", "Home")</li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                </ul>
+            </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - People Search</p>
+        </footer>
+    </div>
+
+</body>
+</html>
