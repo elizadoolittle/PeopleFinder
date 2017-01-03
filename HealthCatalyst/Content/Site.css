@@ -1,8 +1,17 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
+﻿  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column; 
+  }
 
+  .page-flexbox-wrapper{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+main{
+  flex: 1 1 auto;
+      }
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -21,4 +30,22 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+main {
+    flex: 1 0 auto;
+   
+  }
+
+footer{ 
+
+    padding-top: 30em; 
+    position: absolute; bottom: 0; 
+    width: 100%; 
+}
+
+ul li a{ 
+
+      color: white; 
+
 }

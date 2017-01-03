@@ -7,33 +7,63 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/materialize/materialize.css")
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
 </head>
 <body>
-        <div class="container">
+    <div class="page-flexbox-wrapper">
+        <main>
+            <div class="navbar-fixed">
                 <nav>
                     <div class="nav-wrapper">
-                        <a href="#" class="brand-logo right">Logo</a>
-                        <ul id="nav-mobile" class="left hide-on-med-and-down">
+                        <a href="/" class="brand-logo right">E.L.</a>
+                        <ul id="nav" class="left">
                             <li> @Html.ActionLink("About Elizabeth", "About", "Home")</li>
                             <li>@Html.ActionLink("Slow People Finder", "Slow", "Home")</li>
+                            <li>@Html.ActionLink("People Finder", "Index", "Home")</li>
                         </ul>
                     </div>
                 </nav>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-
-                </ul>
+                <ul class="nav navbar-nav"></ul>
             </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - People Search</p>
-        </footer>
-    </div>
+            <div class="container body-content">
+                @RenderBody()
+                <hr />
 
+            </div>
+
+
+
+            <footer class="page-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col l6 s12">
+                            <h5 class="white-text">People Finder</h5>
+                            <p class="grey-text text-lighten-4">Searching for a bunch of randos</p>
+                        </div>
+                        <div class="col l4 offset-l2 s12">
+                            <h5 class="white-text">Links</h5>
+                            <ul class="white-text">
+                                <li class="white-text"> @Html.ActionLink("About Elizabeth", "About", "Home")</li>
+                                <li>@Html.ActionLink("Slow People Finder", "Slow", "Home")</li>
+                                <li>@Html.ActionLink("People Finder", "Index", "Home")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    <div class="container">
+                        <p>&copy; @DateTime.Now.Year - People Search</p>
+                        <a class="grey-text text-lighten-4 right" href="#!">One day there might be more link</a>
+                    </div>
+                </div>
+            </footer>
+
+        </main>
+        </div> 
 </body>
+
 </html>

@@ -1,17 +1,63 @@
 ﻿@{
-    Layout = null;
+    ViewBag.Title = "Home Page";
 }
 
-<!DOCTYPE html>
+<div class="container">
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
-    </div>
-</body>
-</html>
+    <div class="center-block">
+
+        @using (Ajax.BeginForm("Search", "Home", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "" }))
+        {
+
+            @Html.AntiForgeryToken()
+
+            <div class="padding-large">
+
+
+                <div id="appContainer">
+                    <div id="slow">
+                        <div class="row center-align">
+                            <div class="preloader-wrapper small active">
+                                <div class="spinner-layer spinner-gray-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="cardTitle">
+                                <h5>Find your peeps</h5> 
+                            </div>
+                            <div class="row">
+                                <div class="col s12">
+                                    <label for="autocomplete-input">Find your people: &nbsp;&nbsp;&nbsp; </label>
+                                    <input name="autocomplete-input" id="autocomplete-input" class="autocomplete" placeholder="Search..." type="text" />
+                     
+                                </div>
+
+                                <div id="details"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+   </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.1.1.js"
+        integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script src="~/Scripts/slow.js"></script>
